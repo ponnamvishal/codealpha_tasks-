@@ -1,0 +1,18 @@
+[
+  {
+    "question": "How can I reset my account password?",
+    "answer": "Use the Forgot Password option on the login page and follow the steps sent to your registered email."
+  },
+  {
+    "question": "What are your customer support hours?",
+    "answer": "Customer support is available from 9 AM to 6 PM on all working days."
+  },
+  {
+    "question": "How do I contact technical support?",
+    "answer": "Send an email with your issue details and screenshots to support@example.com."
+  },
+  {
+    "question": "How can I update my profile information?",
+    "answer": "Open the profile page after logging in and use the Edit option to update your details."
+  }
+]

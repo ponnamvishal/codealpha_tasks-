@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Language Translator</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #141e30, #243b55);
+      color: #f5f7ff;
+    }
+
+    .blur {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      z-index: 0;
+    }
+    .blur-1 { background:#6a11cb; top:5%; left:10%; }
+    .blur-2 { background:#ff758c; bottom:5%; right:10%; }
+
+    .translator-card {
+      position: relative;
+      z-index: 1;
+      width: 520px;
+      max-width: 96%;
+      background: rgba(255,255,255,0.06);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.55);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 20px 22px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .lang-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .lang-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    label {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    select {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(6,11,25,0.85);
+      color: #f5f7ff;
+      outline: none;
+      font-size: 13px;
+    }
+
+    select:focus {
+      border-color: #6a11cb;
+      box-shadow: 0 0 0 2px rgba(106,17,203,0.45);
+    }
+
+    .text-areas {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      resize: vertical;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.28);
+      background: rgba(9,15,33,0.9);
+      color: #f5f7ff;
+      font-size: 13px;
+      outline: none;
+    }
+
+    textarea::placeholder {
+      color: rgba(204,210,235,0.7);
+    }
+
+    textarea:focus {
+      border-color:#6a11cb;
+      box-shadow:0 0 0 2px rgba(106,17,203,0.45);
+    }
+
+    .actions-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    #translate-btn {
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #ff7eb3, #ff758c);
+      color:#fff;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(255,117,140,0.55);
+      display:flex;
+      align-items:center;
+      gap:6px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    #translate-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(255,117,140,0.7);
+    }
+
+    #translate-btn:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 8px 18px rgba(255,117,140,0.5);
+    }
+
+    .secondary-actions button {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+      margin-left: 6px;
+      background: rgba(255,255,255,0.12);
+      color:#f5f7ff;
+    }
+
+    .secondary-actions button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .footnote {
+      margin-top: 8px;
+      font-size: 11px;
+      opacity: 0.7;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="blur blur-1"></div>
+  <div class="blur blur-2"></div>
+
+  <div class="translator-card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Language Translator</div>
+        <div class="card-subtitle">Select languages, type text, and translate instantly.</div>
+      </div>
+      <div> </div>
+    </div>
+
+    <div class="lang-row">
+      <div class="lang-col">
+        <label for="src-lang">Source language</label>
+        <select id="src-lang">
+          {% for lang in languages %}
+          <option value="{{ lang }}">{{ lang }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="lang-col">
+        <label for="dest-lang">Target language</label>
+        <select id="dest-lang">
+          {% for lang in languages %}
+          <option value="{{ lang }}" {% if lang == 'Hindi' %}selected{% endif %}>{{
+            lang }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="text-areas">
+      <div>
+        <label for="input-text">Input text</label>
+        <textarea id="input-text" placeholder="Type or paste text here..."></textarea>
+      </div>
+      <div>
+        <label for="output-text">Translated text</label>
+        <textarea id="output-text" readonly placeholder="Translation will appear here..."></textarea>
+      </div>
+    </div>
+
+    <div class="actions-row">
+      <button id="translate-btn">
+        <span>Translate</span>
+      </button>
+
+      <div class="secondary-actions">
+        <button id="copy-btn">Copy</button>
+        <button id="speak-btn">Speak</button>
+      </div>
+    </div>
+
+    <div class="footnote">
+      Built with Flask &amp; deep-translator.
+    </div>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

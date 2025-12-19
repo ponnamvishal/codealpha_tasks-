@@ -1,0 +1,9 @@
+translation_project/
+├─ app.py
+├─ requirements.txt
+├─ .vscode/
+│  └─ launch.json
+├─ templates/
+│  └─ index.html
+└─ static/
+   └─ script.js

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>FAQ Chatbot</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #e0f2fe, #f5f3ff);
+      color: #0f172a;
+    }
+
+    .chat-card {
+      width: 520px;
+      max-width: 96%;
+      background: #ffffff;
+      border-radius: 18px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+      padding: 18px 20px;
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .chat-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .chat-subtitle {
+      font-size: 12px;
+      opacity: 0.75;
+      color: #4b5563;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
+      margin-right: 6px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      font-size: 11px;
+      color: #16a34a;
+    }
+
+    #chat-box {
+      height: 320px;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      padding: 12px;
+      overflow-y: auto;
+      background: #f9fafb;
+      margin-bottom: 12px;
+    }
+
+    .message {
+      margin: 6px 0;
+      font-size: 13px;
+      line-height: 1.4;
+      max-width: 88%;
+    }
+
+    .message.user {
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .message.bot {
+      margin-right: auto;
+      text-align: left;
+    }
+
+    .bubble {
+      display: inline-block;
+      padding: 8px 11px;
+      border-radius: 14px;
+    }
+
+    .user .bubble {
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      color: #f9fafb;
+    }
+
+    .bot .bubble {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      color: #111827;
+    }
+
+    .bubble-label {
+      display: block;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      opacity: 0.7;
+      margin-bottom: 2px;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    #user-input {
+      flex: 1;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      color: #111827;
+      outline: none;
+      font-size: 13px;
+    }
+
+    #user-input::placeholder {
+      color: #9ca3af;
+    }
+
+    #user-input:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.35);
+    }
+
+    #send-btn {
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 10px 18px rgba(22, 163, 74, 0.4);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    #send-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 24px rgba(22, 163, 74, 0.55);
+    }
+
+    #send-btn:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 8px 14px rgba(22, 163, 74, 0.35);
+    }
+
+    .footnote {
+      margin-top: 6px;
+      font-size: 10px;
+      opacity: 0.6;
+      text-align: right;
+      color: #6b7280;
+    }
+
+    @media (max-width: 480px) {
+      .chat-card { padding: 14px 12px; }
+      #chat-box { height: 260px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-card">
+    <div class="chat-header">
+      <div>
+        <div class="chat-title">FAQ Chatbot</div>
+        <div class="chat-subtitle">Ask anything about your account, profile, or support.</div>
+      </div>
+      <div class="status">
+        <span class="status-dot"></span>
+        Online
+      </div>
+    </div>
+
+    <div id="chat-box"></div>
+
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="Type your question and press Enter..." />
+      <button id="send-btn">Send</button>
+    </div>
+
+    <div class="footnote">
+      Powered by Flask, NLTK &amp; scikit-learn.
+    </div>
+  </div>
+
+  <script src="/static/faq_script.js"></script>
+</body>
+</html>
